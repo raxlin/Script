@@ -1,0 +1,25 @@
+#!/bin/bash
+
+video_path="/mnt/disk1/ftp/"
+year=`date +%Y`
+month=`date +%m`
+
+if [ "$month" == "1" ] ; then 
+    previous_two_month=11;
+    previous_year=$(($year - 1));
+elif [ "$month" == "2" ] ; then
+    previous_two_month=12;
+    previous_year=$(($year -1));
+else
+    previous_two_month=$(($month - 2));
+    previous_year=$year;
+fi
+
+if [ $previous_two_month -lt 10 ] ; then
+    previous_two_month="0${previous_two_month}"
+fi
+
+echo "previous_year = ${previous_year}";
+echo "previous_two_month = ${previous_two_month}"
+
+rm -rf ${video_path}/*/*/${previous_year}-${previous_two_month}-*
